@@ -1,20 +1,20 @@
-<<<<<<< HEAD
 # Étape 1 : Construction
-=======
-# Étape 1 : Construire l'application
->>>>>>> 8ef60b7 (Initial commit)
 FROM node:18-alpine AS build
+
+# Définir le répertoire de travail
 WORKDIR /app
+
+# Copier les fichiers package.json et package-lock.json pour installer les dépendances
 COPY package*.json ./
 RUN npm install
+
+# Copier tout le reste du projet
 COPY . .
+
+# Construire l'application
 RUN npm run build
 
-<<<<<<< HEAD
-# Étape 2 : Serveur Web
-=======
-# Étape 2 : Servir l'application
->>>>>>> 8ef60b7 (Initial commit)
+# Étape 2 : Serveur Nginx pour servir l'application
 FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
 EXPOSE 80
