@@ -63,13 +63,43 @@ This application has been configured to run within a Docker container for simpli
 
    The application is now accessible at [http://localhost:80](http://localhost:80) or [http://localhost:81](http://localhost:81).
 
-4. **Docker Volumes for Development** (optional):
-   For real-time development, you can use Docker volumes to sync local changes with the container. Example:
-   ```bash
-   docker run -d -p 3000:3000 -v $(pwd):/app my-react-app
+4. **Using docker-compose.yml**:
+   This project includes a `docker-compose.yml` file to simplify the management of multiple services. Below is an example configuration:
+   ```yaml
+   version: '3.9'
+   services:
+     react-app:
+       build:
+         context: ./react-app
+         dockerfile: Dockerfile
+       ports:
+         - "8080:80"
+       volumes:
+         - ./react-app:/app
+       stdin_open: true
+       tty: true
    ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   To build and run the application using `docker-compose.yml`, run:
+   ```bash
+   docker-compose up --build
+   ```
+
+   This will automatically build the image and run the container. The application will be accessible on the specified port in the configuration.
+
+5. **Common Docker Commands**:
+   - Stop a running container:
+     ```bash
+     docker stop <container_id>
+     ```
+   - Remove a container:
+     ```bash
+     docker rm <container_id>
+     ```
+   - Remove unused images:
+     ```bash
+     docker image prune -f
+     ```
 
 ### `npm run eject`
 
@@ -80,4 +110,34 @@ If you aren't satisfied with the build tool and configuration choices, you can `
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However, we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
